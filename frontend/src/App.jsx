@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Sidebar from './components/Sidebar'
@@ -34,10 +34,10 @@ function AppShell() {
   const navigate = useNavigate()
   const seenWarnings = React.useRef(new Set())
 
-  // Health poll every 30s
+  // Health poll every 30s (15s timeout for Render free tier cold starts)
   const checkHealth = useCallback(async () => {
     try {
-      await axios.get(`${API_BASE}/health`, { timeout: 4000 })
+      await axios.get(`${API_BASE}/health`, { timeout: 15000 })
       setApiOnline(true)
     } catch {
       setApiOnline(false)

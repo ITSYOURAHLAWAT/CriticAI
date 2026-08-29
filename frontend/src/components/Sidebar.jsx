@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -200,10 +200,12 @@ export default function Sidebar({ apiOnline }) {
             <div className="text-[11px] font-medium text-slate-400 truncate">
               {apiOnline === null ? 'Checking...' : apiOnline ? 'API Online' : 'API Offline'}
             </div>
-            <div className="text-[9px] text-slate-700">:8000</div>
+            <div className="text-[9px] text-slate-500 font-mono-crisp truncate">
+              {API_BASE.includes('onrender.com') ? 'render cloud' : API_BASE.replace(/^https?:\/\//, '')}
+            </div>
           </div>
         </div>
-        <div className="text-center mt-2 text-[9px] text-slate-800">v1.0.0</div>
+        <div className="text-center mt-2 text-[9px] text-slate-600">v1.0.0</div>
       </div>
     </aside>
   )
