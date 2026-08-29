@@ -61,13 +61,30 @@ app = FastAPI(
     description="Multi-agent LLM evaluation system with LangGraph orchestration",
 )
 
+
+# ── CORS ──────────────────────────────────────────────────────────────────────
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+if ENVIRONMENT == "production":
+    # In production, allow your Vercel frontend + any *.vercel.app preview URLs
+    CORS_ORIGINS = [
+        "https://criticai-ten.vercel.app",
+        "https://criticai.vercel.app",
+    ]
+else:
+    # In development allow all origins
+    CORS_ORIGINS = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=CORS_ORIGINS if ENVIRONMENT == "production" else ["*"],
+    allow_origin_regex=r"https://.*\.vercel\.app" if ENVIRONMENT == "production" else None,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
+
 
 
 # ─── Pydantic models ──────────────────────────────────────────────────────────

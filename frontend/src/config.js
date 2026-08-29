@@ -1,5 +1,7 @@
 // Central API configuration
-export const API_BASE = 'http://localhost:8000'
+// In development: uses localhost:8000
+// In production (Vercel): reads VITE_API_URL environment variable set to your Render backend URL
+export const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 // Evaluation history stored in localStorage
 export const HISTORY_KEY = 'criticai_eval_history'

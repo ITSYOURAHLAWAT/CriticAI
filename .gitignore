@@ -1,6 +1,6 @@
-# Python
+﻿# ─── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
 *.pyd
 .Python
@@ -9,46 +9,44 @@ dist/
 build/
 .eggs/
 venv/
-env/
 .venv/
-*.env
+env/
 
-# Environment / Secrets
+# ─── Environment files (NEVER push secrets) ─────────────────────────────────
 .env
 .env.local
+.env.production
 .env.*.local
 *.key
 
-# Database (SQLite)
+# ─── Database (NEVER push — Render has its own state) ───────────────────────
 *.db
 *.sqlite
 *.sqlite3
+criticai.db
 
-# Frontend build output
-frontend/dist/
+# ─── Logs and temp files ────────────────────────────────────────────────────
+*.log
+scratch/
+data/
+reports/*.json
+
+# ─── Frontend ───────────────────────────────────────────────────────────────
 frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.production
 
-# OS
+# ─── IDE ────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# IDE
-.vscode/
-.idea/
-*.suo
-*.user
-
-# Logs
-*.log
-logs/
-
-# Temp / cache
-.cache/
-*.tmp
-tmp/
-temp/
-
-# Dataset uploads (user data, not code)
+# ─── Dataset uploads (user data, not source code) ───────────────────────────
 uploads/
 datasets/
+
