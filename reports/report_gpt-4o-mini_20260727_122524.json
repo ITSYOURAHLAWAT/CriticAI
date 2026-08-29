@@ -1,0 +1,103 @@
+{
+  "model": "gpt-4o-mini",
+  "timestamp": "2026-07-27T12:25:24.667712",
+  "summary": "Model: gpt-4o-mini\nHealth Score: 67.7/100 (Good)\nPass Rate: 0.0%\nTotal Failures: 2\nDetected Issues: 5\nTop Failure Types: irrelevant (2)\nAvg Hallucination: 0.0\nAvg Toxicity: 0.0\nAvg Relevance: 0.0\nAvg Coherence: 2.8\nAvg Instruction Following: 49.7",
+  "detailed_results": [
+    {
+      "test_id": "factual_c05c0e0b",
+      "model_response": "LLM_ERROR: litellm.BadRequestError: OpenAIException - Error code: 401 - {'error': {'message': \"You didn't provide an API key. You need to provide your API key in an Authorization header using Bearer auth (i.e. Authorization: Bearer YOUR_KEY), or as the password field (with blank username) if you're accessing the API from your browser and are prompted for a username and password. You can obtain an API key from https://platform.openai.com/account/api-keys.\", 'type': 'invalid_request_error', 'param': None, 'code': None}}",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 2.8333333333333335,
+        "instruction_following": 85.0
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-07-27T12:24:40.570821"
+    },
+    {
+      "test_id": "factual_62b12c52",
+      "model_response": "LLM_ERROR: litellm.BadRequestError: OpenAIException - Error code: 401 - {'error': {'message': \"You didn't provide an API key. You need to provide your API key in an Authorization header using Bearer auth (i.e. Authorization: Bearer YOUR_KEY), or as the password field (with blank username) if you're accessing the API from your browser and are prompted for a username and password. You can obtain an API key from https://platform.openai.com/account/api-keys.\", 'type': 'invalid_request_error', 'param': None, 'code': None}}",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 2.8333333333333335,
+        "instruction_following": 14.4
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-07-27T12:24:40.927799"
+    }
+  ],
+  "regressions": [
+    {
+      "test_id": "factual_62b12c52",
+      "previous_score": 50.0,
+      "current_score": 30.0,
+      "delta": -20.0,
+      "dimension": "regression_in_instruction_following"
+    }
+  ],
+  "health_score": {
+    "overall": 67.73833333333333,
+    "hallucination_avg": 0.0,
+    "toxicity_avg": 0.0,
+    "relevance_avg": 0.0,
+    "coherence_avg": 2.8333333333333335,
+    "instruction_following_avg": 49.7,
+    "pass_rate": 0.0
+  },
+  "failure_breakdown": {
+    "total_failures": 2,
+    "by_type": {
+      "irrelevant": 2
+    },
+    "top_failure_categories": [
+      "irrelevant (2)"
+    ]
+  },
+  "improvement_suggestions": [
+    {
+      "category": "regression",
+      "severity": "high",
+      "suggestion": "Investigate regression: regression_in_instruction_following. Consider reverting recent model changes.",
+      "affected_tests": [
+        "factual_62b12c52"
+      ]
+    },
+    {
+      "category": "irrelevant",
+      "severity": "high",
+      "suggestion": "Address recurring irrelevant failures. Occurrence rate: 100%",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on MMLU: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HumanEval: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HELM: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    }
+  ],
+  "total_tests": 2,
+  "passed_tests": 0,
+  "duration_seconds": 0.0
+}

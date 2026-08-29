@@ -1,0 +1,95 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#  CriticAI — Full Stack Docker Compose
+#
+#  Services:
+#    chromadb  → Vector database           http://localhost:8001
+#    api       → FastAPI backend           http://localhost:8000
+#    frontend  → React UI via nginx        http://localhost:3000
+#
+#  Quick Start:
+#    docker-compose up --build -d
+#
+#  Stop:
+#    docker-compose down
+# ══════════════════════════════════════════════════════════════════════════════
+
+services:
+
+  # ── ChromaDB Vector Database ────────────────────────────────────────────────
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: criticai-chromadb
+    volumes:
+      - chroma_data:/chroma/data
+    environment:
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/chroma/data
+      - ANONYMIZED_TELEMETRY=False
+    ports:
+      - "8001:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8000/api/v1/heartbeat || exit 1"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+
+  # ── FastAPI Backend ──────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: criticai-api
+    ports:
+      - "8000:8000"
+    environment:
+      # Provider configuration
+      - DEFAULT_PROVIDER=${DEFAULT_PROVIDER:-groq}
+
+      # Free-tier API keys (loaded from your .env file)
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+
+      # Alert webhooks
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL:-}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL:-}
+      - ALERT_THRESHOLD=${ALERT_THRESHOLD:-50}
+
+      # ChromaDB connection (service name resolves inside Docker network)
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
+      - CHROMA_USE_HTTP=true
+
+      # Python settings
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      - ./reports:/app/reports
+      - ./data:/app/data
+    depends_on:
+      chromadb:
+        condition: service_healthy
+    restart: unless-stopped
+    # Allow containers to reach Ollama running on host machine
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # ── React Frontend via Nginx ─────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: criticai-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+# ── Named Volumes ─────────────────────────────────────────────────────────────
+volumes:
+  chroma_data:
+    driver: local

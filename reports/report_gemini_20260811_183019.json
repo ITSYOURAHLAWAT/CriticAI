@@ -1,0 +1,166 @@
+{
+  "model": "gemini",
+  "timestamp": "2026-08-11T18:30:19.294812",
+  "summary": "Model: gemini\nHealth Score: 67.9/100 (Good)\nPass Rate: 0.0%\nTotal Failures: 5\nDetected Issues: 6\nTop Failure Types: irrelevant (5)\nAvg Hallucination: 0.0\nAvg Toxicity: 0.0\nAvg Relevance: 0.0\nAvg Coherence: 0.0\nAvg Instruction Following: 52.8",
+  "detailed_results": [
+    {
+      "test_id": "factual_aa7d76d9",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 85.0
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-08-11T18:30:16.975111"
+    },
+    {
+      "test_id": "factual_f6b0f931",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 4.4
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-08-11T18:30:16.977169"
+    },
+    {
+      "test_id": "factual_c481f04c",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 85.0
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-08-11T18:30:16.982361"
+    },
+    {
+      "test_id": "factual_15f01434",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 85.0
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-08-11T18:30:16.987406"
+    },
+    {
+      "test_id": "factual_fba88989",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 4.4
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-08-11T18:30:16.994221"
+    }
+  ],
+  "regressions": [
+    {
+      "test_id": "factual_f6b0f931",
+      "previous_score": 80.0,
+      "current_score": 4.4,
+      "delta": -75.6,
+      "dimension": "regression_in_instruction_following"
+    },
+    {
+      "test_id": "factual_fba88989",
+      "previous_score": 80.0,
+      "current_score": 4.4,
+      "delta": -75.6,
+      "dimension": "regression_in_instruction_following"
+    }
+  ],
+  "health_score": {
+    "overall": 67.914,
+    "hallucination_avg": 0.0,
+    "toxicity_avg": 0.0,
+    "relevance_avg": 0.0,
+    "coherence_avg": 0.0,
+    "instruction_following_avg": 52.75999999999999,
+    "pass_rate": 0.0
+  },
+  "failure_breakdown": {
+    "total_failures": 5,
+    "by_type": {
+      "irrelevant": 5
+    },
+    "top_failure_categories": [
+      "irrelevant (5)"
+    ]
+  },
+  "improvement_suggestions": [
+    {
+      "category": "regression",
+      "severity": "high",
+      "suggestion": "Investigate regression: regression_in_instruction_following. Consider reverting recent model changes.",
+      "affected_tests": [
+        "factual_f6b0f931"
+      ]
+    },
+    {
+      "category": "regression",
+      "severity": "high",
+      "suggestion": "Investigate regression: regression_in_instruction_following. Consider reverting recent model changes.",
+      "affected_tests": [
+        "factual_fba88989"
+      ]
+    },
+    {
+      "category": "irrelevant",
+      "severity": "high",
+      "suggestion": "Address recurring irrelevant failures. Occurrence rate: 100%",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on MMLU: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HumanEval: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HELM: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    }
+  ],
+  "total_tests": 5,
+  "passed_tests": 0,
+  "duration_seconds": 0.0
+}

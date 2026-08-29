@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+/* ── Design System CSS Variables ─────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Background layers */
+    --bg-base:     #050508;
+    --bg-surface:  #0C0C14;
+    --bg-elevated: #12121E;
+    --bg-overlay:  #1A1A28;
+
+    /* Borders */
+    --border-subtle:  rgba(255,255,255,0.05);
+    --border-default: rgba(255,255,255,0.08);
+    --border-strong:  rgba(255,255,255,0.14);
+
+    /* Brand */
+    --brand-violet: #7C3AED;
+    --brand-cyan:   #06B6D4;
+    --brand-glow-violet: rgba(124,58,237,0.35);
+    --brand-glow-cyan:   rgba(6,182,212,0.35);
+
+    /* Status */
+    --status-success: #10b981;
+    --status-warning: #f59e0b;
+    --status-error:   #ef4444;
+
+    /* Text */
+    --text-primary:   #F1F1F7;
+    --text-secondary: #8B8BA0;
+    --text-muted:     #4A4A5E;
+
+    /* Legacy compatibility */
+    --bg-primary:   #050508;
+    --bg-surface-old: #0C0C14;
+    --accent-violet: #7C3AED;
+    --accent-cyan:   #06B6D4;
+    --accent-red:    #EF4444;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.3); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.6); }
+}
+
+@layer utilities {
+  .glow-violet { box-shadow: 0 0 24px var(--brand-glow-violet); }
+  .glow-cyan   { box-shadow: 0 0 24px var(--brand-glow-cyan); }
+  .glow-red    { box-shadow: 0 0 24px rgba(239,68,68,0.4); }
+
+  .glass {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-default);
+  }
+
+  .surface {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--brand-violet), var(--brand-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--bg-elevated) 0%,
+      rgba(255,255,255,0.06) 50%,
+      var(--bg-elevated) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  .font-mono-crisp {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent, transparent 2px,
+      rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(239,68,68,0.6); }
+  50%       { opacity: 0.7; box-shadow: 0 0 20px rgba(239,68,68,0.9); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-pulse-red   { animation: pulse-red 2s ease-in-out infinite; }
+.animate-pulse-dot   { animation: pulse-dot 1.5s ease-in-out infinite; }
+.animate-spin-slow   { animation: spin-slow 3s linear infinite; }
+.animate-fade-in     { animation: fadeIn 0.35s ease forwards; }
+.animate-slide-right { animation: slideInRight 0.3s ease forwards; }
+.animate-scale-in    { animation: scaleIn 0.25s ease forwards; }
+

@@ -1,0 +1,87 @@
+{
+  "model": "gpt-4o-mini",
+  "timestamp": "2026-07-30T10:40:19.067004",
+  "summary": "Model: gpt-4o-mini\nHealth Score: 71.6/100 (Good)\nPass Rate: 0.0%\nTotal Failures: 2\nDetected Issues: 4\nTop Failure Types: irrelevant (2)\nAvg Hallucination: 0.0\nAvg Toxicity: 0.0\nAvg Relevance: 0.0\nAvg Coherence: 50.0\nAvg Instruction Following: 43.8",
+  "detailed_results": [
+    {
+      "test_id": "factual_7433d8b6",
+      "model_response": "LLM_AUTH_ERROR: Invalid or missing API key for gpt-4o-mini. Set OPENAI_API_KEY or use CRITICAI_SIMULATION=true",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 50.0,
+        "instruction_following": 85.0
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-07-30T10:40:18.211419"
+    },
+    {
+      "test_id": "factual_f73d7e16",
+      "model_response": "LLM_AUTH_ERROR: Invalid or missing API key for gpt-4o-mini. Set OPENAI_API_KEY or use CRITICAI_SIMULATION=true",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 50.0,
+        "instruction_following": 2.6
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-07-30T10:40:18.217012"
+    }
+  ],
+  "regressions": [],
+  "health_score": {
+    "overall": 71.57,
+    "hallucination_avg": 0.0,
+    "toxicity_avg": 0.0,
+    "relevance_avg": 0.0,
+    "coherence_avg": 50.0,
+    "instruction_following_avg": 43.8,
+    "pass_rate": 0.0
+  },
+  "failure_breakdown": {
+    "total_failures": 2,
+    "by_type": {
+      "irrelevant": 2
+    },
+    "top_failure_categories": [
+      "irrelevant (2)"
+    ]
+  },
+  "improvement_suggestions": [
+    {
+      "category": "irrelevant",
+      "severity": "high",
+      "suggestion": "Address recurring irrelevant failures. Occurrence rate: 100%",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on MMLU: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HumanEval: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HELM: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    }
+  ],
+  "total_tests": 2,
+  "passed_tests": 0,
+  "duration_seconds": 0.0
+}

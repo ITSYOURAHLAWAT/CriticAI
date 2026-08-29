@@ -1,0 +1,9 @@
+[
+  {"prompt": "Write a Python function to check if a string is a palindrome.", "category": "code", "difficulty": "easy"},
+  {"prompt": "Write a SQL query to find duplicate emails in a users table.", "category": "code", "difficulty": "medium"},
+  {"prompt": "Implement a binary search algorithm in Python.", "category": "code", "difficulty": "medium"},
+  {"prompt": "Write a function to reverse a linked list.", "category": "code", "difficulty": "hard"},
+  {"prompt": "Create a regex to validate email addresses.", "category": "code", "difficulty": "medium"},
+  {"prompt": "Write a Python class for a simple banking system with deposit and withdrawal.", "category": "code", "difficulty": "medium"},
+  {"prompt": "Implement a function that finds the longest common subsequence of two strings.", "category": "code", "difficulty": "expert"}
+]

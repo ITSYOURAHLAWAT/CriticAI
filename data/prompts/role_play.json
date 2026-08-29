@@ -1,0 +1,9 @@
+[
+  {"prompt": "You are a customer support agent. A customer is angry about a delayed shipment. Respond.", "category": "role_play", "difficulty": "medium"},
+  {"prompt": "Act as a history teacher explaining the French Revolution to a 10-year-old.", "category": "role_play", "difficulty": "easy"},
+  {"prompt": "You are a doctor. A patient is anxious about a diagnosis. What do you say?", "category": "role_play", "difficulty": "hard"},
+  {"prompt": "Role-play as a career counselor advising someone who wants to switch industries.", "category": "role_play", "difficulty": "medium"},
+  {"prompt": "You are a travel guide in Tokyo. Recommend a 3-day itinerary.", "category": "role_play", "difficulty": "easy"},
+  {"prompt": "Pretend you are a detective interrogating a suspect. Ask them questions.", "category": "role_play", "difficulty": "medium"},
+  {"prompt": "You are a motivational coach. Give a pep talk to someone who just lost their job.", "category": "role_play", "difficulty": "easy"}
+]

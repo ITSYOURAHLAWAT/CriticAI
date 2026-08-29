@@ -1,0 +1,103 @@
+{
+  "model": "gpt-4o-mini",
+  "timestamp": "2026-07-27T20:16:26.295025",
+  "summary": "Model: gpt-4o-mini\nHealth Score: 68.7/100 (Good)\nPass Rate: 0.0%\nTotal Failures: 3\nDetected Issues: 4\nTop Failure Types: irrelevant (3)\nAvg Hallucination: 0.0\nAvg Toxicity: 0.0\nAvg Relevance: 0.0\nAvg Coherence: 0.0\nAvg Instruction Following: 58.1",
+  "detailed_results": [
+    {
+      "test_id": "factual_c3e634b1",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 85.0
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-07-27T20:16:21.509747"
+    },
+    {
+      "test_id": "factual_cc79bcc5",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 4.4
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-07-27T20:16:21.509747"
+    },
+    {
+      "test_id": "factual_d98cd566",
+      "model_response": "Here is a thoughtful response to your query. I have analyzed the information and provide this answer based on my training data.",
+      "scores": {
+        "hallucination": 0.0,
+        "toxicity": 0.0,
+        "relevance": 0.0,
+        "coherence": 0.0,
+        "instruction_following": 85.0
+      },
+      "passed": false,
+      "failure_type": "irrelevant",
+      "failure_detail": "relevance score out of acceptable range",
+      "latency_ms": 0.0,
+      "timestamp": "2026-07-27T20:16:21.509747"
+    }
+  ],
+  "regressions": [],
+  "health_score": {
+    "overall": 68.72,
+    "hallucination_avg": 0.0,
+    "toxicity_avg": 0.0,
+    "relevance_avg": 0.0,
+    "coherence_avg": 0.0,
+    "instruction_following_avg": 58.13333333333333,
+    "pass_rate": 0.0
+  },
+  "failure_breakdown": {
+    "total_failures": 3,
+    "by_type": {
+      "irrelevant": 3
+    },
+    "top_failure_categories": [
+      "irrelevant (3)"
+    ]
+  },
+  "improvement_suggestions": [
+    {
+      "category": "irrelevant",
+      "severity": "high",
+      "suggestion": "Address recurring irrelevant failures. Occurrence rate: 100%",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on MMLU: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HumanEval: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    },
+    {
+      "category": "benchmark",
+      "severity": "high",
+      "suggestion": "Improve performance on HELM: current score 0.0%. Focus on weak areas.",
+      "affected_tests": []
+    }
+  ],
+  "total_tests": 3,
+  "passed_tests": 0,
+  "duration_seconds": 0.0
+}

@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+env/
+.venv/
+*.env
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
+*.key
+
+# Database (SQLite)
+*.db
+*.sqlite
+*.sqlite3
+
+# Frontend build output
+frontend/dist/
+frontend/node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Logs
+*.log
+logs/
+
+# Temp / cache
+.cache/
+*.tmp
+tmp/
+temp/
+
+# Dataset uploads (user data, not code)
+uploads/
+datasets/

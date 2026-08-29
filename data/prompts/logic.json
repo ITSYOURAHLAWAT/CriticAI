@@ -1,0 +1,9 @@
+[
+  {"prompt": "If all humans are mortal and Socrates is human, what can we conclude?", "category": "logic", "difficulty": "easy"},
+  {"prompt": "Solve this: A bat and a ball cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost?", "category": "logic", "difficulty": "medium"},
+  {"prompt": "What comes next in the sequence: 2, 6, 18, 54, ?", "category": "logic", "difficulty": "easy"},
+  {"prompt": "You have a 3-gallon jug and a 5-gallon jug. How do you measure exactly 4 gallons?", "category": "logic", "difficulty": "hard"},
+  {"prompt": "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?", "category": "logic", "difficulty": "medium"},
+  {"prompt": "A doctor gives you three pills and tells you to take one every half hour. How long will they last?", "category": "logic", "difficulty": "hard"},
+  {"prompt": "A man pushes his car to a hotel and tells the owner he's bankrupt. Why?", "category": "logic", "difficulty": "expert"}
+]
