@@ -191,14 +191,14 @@ export default function Sidebar({ apiOnline }) {
           <span
             className="w-1.5 h-1.5 rounded-full shrink-0"
             style={{
-              background: apiOnline === null ? '#64748b' : apiOnline ? '#22c55e' : '#ef4444',
-              boxShadow: apiOnline ? '0 0 6px #22c55e' : 'none',
-              animation: apiOnline ? 'pulse-dot 1.5s ease-in-out infinite' : 'none',
+              background: apiOnline === null ? '#f59e0b' : apiOnline ? '#22c55e' : '#ef4444',
+              boxShadow: apiOnline ? '0 0 6px #22c55e' : apiOnline === null ? '0 0 6px #f59e0b' : 'none',
+              animation: 'pulse-dot 1.5s ease-in-out infinite',
             }}
           />
           <div className="flex-1 min-w-0">
             <div className="text-[11px] font-medium text-slate-400 truncate">
-              {apiOnline === null ? 'Checking...' : apiOnline ? 'API Online' : 'API Offline'}
+              {apiOnline === null ? 'Waking API...' : apiOnline ? 'API Online' : 'API Offline'}
             </div>
             <div className="text-[9px] text-slate-500 font-mono-crisp truncate">
               {API_BASE.includes('onrender.com') ? 'render cloud' : API_BASE.replace(/^https?:\/\//, '')}

@@ -34,19 +34,23 @@ function AppShell() {
   const navigate = useNavigate()
   const seenWarnings = React.useRef(new Set())
 
-  // Health poll every 30s (15s timeout for Render free tier cold starts)
-  const checkHealth = useCallback(async () => {
+  // Health poll with 60s timeout to support Render free tier cold starts
+  const checkHealth = useCallback(async (isRetry = false) => {
     try {
-      await axios.get(`${API_BASE}/health`, { timeout: 15000 })
+      await axios.get(`${API_BASE}/health`, { timeout: 60000 })
       setApiOnline(true)
     } catch {
       setApiOnline(false)
+      // Retry once after 6 seconds if Render is still spinning up
+      if (!isRetry) {
+        setTimeout(() => checkHealth(true), 6000)
+      }
     }
   }, [])
 
   useEffect(() => {
     checkHealth()
-    const id = setInterval(checkHealth, 30000)
+    const id = setInterval(() => checkHealth(), 30000)
     return () => clearInterval(id)
   }, [checkHealth])
 
