@@ -368,7 +368,7 @@ export default function RunEvaluation({ addEval }) {
             toast.success(`✅ Evaluation complete for ${model}!`)
             setTimeout(() => {
               setIsRunning(false)
-              navigate('/results')
+              navigate(`/results?model=${encodeURIComponent(model)}`)
             }, 1800)
           } else if (stage === 'error') {
             addLog('❌', `Pipeline error: ${message}`)

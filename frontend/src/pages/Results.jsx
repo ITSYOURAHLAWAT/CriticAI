@@ -74,7 +74,7 @@ export default function Results() {
       const unique = [...new Set((res.data || []).map(e => e.model).filter(Boolean))]
       setDbModels(unique)
 
-      const queryParams = new URLSearchParams(window.location.search)
+      const queryParams = new URLSearchParams(location.search)
       const queryModel = queryParams.get('model')
       if (queryModel) {
         setSelectedModel(queryModel)

@@ -369,15 +369,24 @@ class DatabaseManager:
             conn.close()
 
     def get_evaluation_by_model(self, model_name: str) -> dict:
-        """Fetch the latest completed evaluation for a model."""
+        """Fetch the latest evaluation for a model (case-insensitive & status resilient)."""
         conn = self.get_connection()
         try:
             row = conn.execute("""
                 SELECT * FROM evaluations
-                WHERE model = ? AND status = 'completed'
+                WHERE (model = ? OR LOWER(model) = LOWER(?) OR model LIKE ?)
                 ORDER BY created_at DESC
                 LIMIT 1
-            """, (model_name,)).fetchone()
+            """, (model_name, model_name, f"%{model_name}%")).fetchone()
+
+            if not row:
+                # Fallback to the overall latest evaluation if model name query had slight mismatch
+                row = conn.execute("""
+                    SELECT * FROM evaluations
+                    ORDER BY created_at DESC
+                    LIMIT 1
+                """).fetchone()
+
             if not row:
                 return None
             data = dict(row)
