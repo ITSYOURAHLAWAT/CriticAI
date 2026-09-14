@@ -197,42 +197,44 @@ Return ONLY valid JSON:
     # 1. Try Groq
     groq_key = os.environ.get("GROQ_API_KEY", "")
     if groq_key and Groq:
-        try:
-            client = Groq(api_key=groq_key)
-            resp = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                max_tokens=800,
-                temperature=0.3,
-            )
-            raw = resp.choices[0].message.content
-            return _parse_json_from_llm(raw)
-        except Exception as e:
-            print(f"[Summary Engine] Groq summary failed: {e}")
+        for groq_model in ["llama3-8b-8192", "llama-3.1-8b-instant", "gemma2-9b-it"]:
+            try:
+                client = Groq(api_key=groq_key)
+                resp = client.chat.completions.create(
+                    model=groq_model,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    max_tokens=800,
+                    temperature=0.3,
+                )
+                raw = resp.choices[0].message.content
+                return _parse_json_from_llm(raw)
+            except Exception as e:
+                print(f"[Summary Engine] Groq summary failed with {groq_model}: {e}")
+                continue
 
     # 2. Try Gemini via REST client (stable, handles SDK version variances)
     gemini_key = os.environ.get("GEMINI_API_KEY", "") or os.environ.get("GOOGLE_API_KEY", "")
     if gemini_key:
-        try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
-            body = {
-                "contents": [{"parts": [{"text": user_prompt}]}],
-                "systemInstruction": {"parts": [{"text": system_prompt}]},
-                "generationConfig": {"temperature": 0.3}
-            }
-            # Use sync httpx
-            with httpx.Client(timeout=30.0) as client:
-                resp = client.post(url, json=body)
-                if resp.status_code == 200:
-                    raw = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
-                    return _parse_json_from_llm(raw)
-                else:
-                    print(f"[Summary Engine] Gemini REST returned HTTP {resp.status_code}: {resp.text}")
-        except Exception as e:
-            print(f"[Summary Engine] Gemini summary failed: {e}")
+        for gemini_model in ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-pro"]:
+            try:
+                url = f"https://generativelanguage.googleapis.com/v1/models/{gemini_model}:generateContent?key={gemini_key}"
+                body = {
+                    "contents": [{"parts": [{"text": user_prompt}]}],
+                    "generationConfig": {"temperature": 0.3}
+                }
+                with httpx.Client(timeout=30.0) as client:
+                    resp = client.post(url, json=body)
+                    if resp.status_code == 200:
+                        raw = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+                        return _parse_json_from_llm(raw)
+                    else:
+                        print(f"[Summary Engine] Gemini {gemini_model} returned HTTP {resp.status_code}: {resp.text[:200]}")
+            except Exception as e:
+                print(f"[Summary Engine] Gemini summary failed with {gemini_model}: {e}")
+                continue
 
     # 3. Fallback
     print("[Summary Engine] Falling back to rule-based summary generation.")

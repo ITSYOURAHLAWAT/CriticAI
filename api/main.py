@@ -63,31 +63,16 @@ app = FastAPI(
 
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
-ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
-
-if ENVIRONMENT == "production":
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=[
-            "https://criticai-ten.vercel.app",
-            "https://criticai.vercel.app",
-        ],
-        allow_origin_regex=r"https://.*\.vercel\.app",
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-        expose_headers=["*"],
-    )
-else:
-    # Development: allow all origins. Note: credentials cannot be used with wildcard.
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=False,
-        allow_methods=["*"],
-        allow_headers=["*"],
-        expose_headers=["*"],
-    )
+# Allow all origins unconditionally — the app is a public demo tool.
+# Using allow_origins=["*"] disables credentials, which is fine here.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+)
 
 
 # ─── Pydantic models ──────────────────────────────────────────────────────────
