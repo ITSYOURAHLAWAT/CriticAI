@@ -1,35 +1,51 @@
-# Critic AI
+# CriticAI — Multi-Agent LLM Evaluation System
 
-> **Critic AI** – a data‑driven, AI‑powered pipeline for automated testing, model evaluation, and continuous quality monitoring.
+<div align="center">
+
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-critic--ai--application.vercel.app-7c3aed?style=for-the-badge&logo=vercel&logoColor=white)](https://critic-ai-application.vercel.app)
+[![Backend API](https://img.shields.io/badge/⚙️%20Backend%20API-criticai--backend.onrender.com-10b981?style=for-the-badge&logo=render&logoColor=white)](https://criticai-backend.onrender.com/docs)
+[![GitHub](https://img.shields.io/badge/GitHub-ITSYOURAHLAWAT%2FCriticAI-181717?style=for-the-badge&logo=github)](https://github.com/ITSYOURAHLAWAT/CriticAI)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![React](https://img.shields.io/badge/React-18+-61dafb?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+
+**A production-ready, multi-agent LLM evaluation platform. Run automated tests across AI models, benchmark performance, detect regressions, and get rich analytics — entirely free.**
+
+[🌐 Open Live App](https://critic-ai-application.vercel.app) · [📖 API Docs](https://criticai-backend.onrender.com/docs) · [🐛 Report Bug](https://github.com/ITSYOURAHLAWAT/CriticAI/issues)
+
+</div>
+
+---
+
+![CriticAI Dashboard Preview](docs/preview.png)
 
 ---
 
 ## Table of Contents
 
-- [What is Critic AI?](#what-is-critic-ai)
+- [What is CriticAI?](#what-is-criticai)
 - [Key Features](#key-features)
+- [Live Deployment](#live-deployment)
 - [Architecture Overview](#architecture-overview)
-- [Getting Started](#getting-started)
+- [Getting Started (Local Dev)](#getting-started-local-dev)
 - [Usage](#usage)
-- [Testing & CI](#testing--ci)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ---
 
-## What is Critic AI?
+## What is CriticAI?
 
-Critic AI is a **full‑stack, end‑to‑end** framework that turns raw data into actionable insights. It:
+**CriticAI** is a full-stack, end-to-end framework for evaluating Large Language Models (LLMs) automatically. It orchestrates a team of specialized AI agents to:
 
-1. **Ingests** datasets from a variety of sources (CSV, JSON, SQL, APIs).
-2. **Runs** a suite of automated tests – unit, integration, performance, and data‑quality checks.
-3. **Scores** models using custom metrics and generates comprehensive reports.
-4. **Visualises** results in a web dashboard powered by the `frontend` package.
-5. **Deploys** via Docker and Docker‑Compose for reproducible environments.
+1. **Generate** diverse test cases across categories (reasoning, coding, math, summarization, red-team).
+2. **Evaluate** model responses using scoring agents with customizable rubrics.
+3. **Benchmark** multiple models side-by-side in A/B tests and regression checks.
+4. **Report** rich analytics — pass rates, token usage, latency, model cards — through a premium dark-themed dashboard.
+5. **Stream** evaluation progress in real-time via Server-Sent Events (SSE).
 
-The project is built with Python 3.11+, Docker, and a lightweight SQLite database for persistence.
+Built with **Python 3.11 + FastAPI** (backend) and **React 18 + Vite** (frontend), deployed free on **Render** + **Vercel**.
 
 ---
 
@@ -37,158 +53,150 @@ The project is built with Python 3.11+, Docker, and a lightweight SQLite databas
 
 | Feature | Description |
 |---------|-------------|
-| **Automated Test Runner** | `ab_tester.py` orchestrates test suites, logs failures, and produces JSON/HTML reports. |
-| **Model Evaluation** | `rag/`, `orchestrator/`, and `train/` provide pipelines for training, fine‑tuning, and evaluating LLMs. |
-| **Data Quality Checks** | `dataset_parser.py` validates schemas, checks for missing values, and flags outliers. |
-| **Continuous Integration** | `docker-compose.yml` and `docker-start.bat` enable CI pipelines on GitHub Actions or local runners. |
-| **Web Dashboard** | The `frontend/` folder contains a React/Vite app that visualises test results, model metrics, and experiment logs. |
-| **Extensible Plugin System** | Add new test modules or metrics by extending the `tests/` package. |
-| **CLI Interface** | `cli.py` offers a command‑line interface for common tasks (run tests, train models, generate reports). |
+| 🤖 **Multi-Agent Orchestration** | LangGraph-powered agents for test generation, evaluation, red-teaming, and reporting |
+| 🔄 **Real-time Streaming** | Live SSE-based progress updates during evaluations |
+| 📊 **Rich Analytics Dashboard** | Pass rates, model comparisons, A/B tests, regression detection |
+| 🏃 **Batch Queue** | Queue multiple evaluations and run them in parallel |
+| 🎯 **Playground** | Interactive single-prompt tester with side-by-side model comparison |
+| 🛡️ **Red Team Mode** | Adversarial testing to discover model failure modes |
+| 📋 **Model Cards** | Auto-generated performance snapshots per model |
+| 🔌 **Multi-Provider** | Groq, Gemini, OpenAI, Ollama — all free tiers supported |
+| 📁 **Template Library** | Reusable evaluation templates for common tasks |
+| 📈 **Token Usage Tracking** | Monitor API costs across providers |
+
+---
+
+## Live Deployment
+
+| Component | URL | Platform |
+|-----------|-----|----------|
+| 🌐 **Frontend** | [https://critic-ai-application.vercel.app](https://critic-ai-application.vercel.app) | Vercel (Free) |
+| ⚙️ **Backend API** | [https://criticai-backend.onrender.com](https://criticai-backend.onrender.com) | Render (Free) |
+| 📖 **API Docs** | [https://criticai-backend.onrender.com/docs](https://criticai-backend.onrender.com/docs) | Render (Free) |
+
+> [!NOTE]
+> The backend runs on Render's free tier, which **spins down after 15 minutes of inactivity**. The first request after a sleep period may take 20–50 seconds to respond while Render wakes the service. Subsequent requests are fast.
 
 ---
 
 ## Architecture Overview
 
 ```
-┌───────────────────────┐
-│  Frontend (React)     │
-│  └─ /frontend          │
-├───────────────────────┤
-│  API Layer (FastAPI)  │
-│  └─ /api               │
-├───────────────────────┤
-│  Core Engine (Python) │
-│  ├─ ab_tester.py      │
-│  ├─ dataset_parser.py │
-│  ├─ orchestrator/     │
-│  ├─ rag/              │
-│  └─ train/            │
-├───────────────────────┤
-│  Database (SQLite)    │
-│  └─ criticai.db       │
-└───────────────────────┘
+┌────────────────────────────────────┐
+│   Frontend (React 18 + Vite)       │  ← Vercel
+│   └─ /frontend/src/pages/          │
+│      Dashboard, Playground, etc.   │
+├────────────────────────────────────┤
+│   API Layer (FastAPI + uvicorn)    │  ← Render
+│   └─ /api/main.py                  │
+├────────────────────────────────────┤
+│   Agent Orchestration (LangGraph)  │
+│   ├─ orchestrator/graph.py         │
+│   ├─ agents/test_generator.py      │
+│   ├─ agents/evaluator_agent.py     │
+│   ├─ agents/red_team_agent.py      │
+│   └─ agents/reporter_agent.py      │
+├────────────────────────────────────┤
+│   RAG Layer (ChromaDB)             │
+│   └─ rag/chroma_store.py           │
+├────────────────────────────────────┤
+│   Database (SQLite)                │
+│   └─ criticai.db                   │
+└────────────────────────────────────┘
 ```
-
-The **CLI** (`cli.py`) is the entry point for most operations. It delegates to the core engine, which in turn uses the `tests/` package for test discovery and execution. Results are persisted in `criticai.db` and can be visualised via the web dashboard.
 
 ---
 
-## Getting Started
+## Getting Started (Local Dev)
 
 ### Prerequisites
 
 - **Python 3.11+**
-- **Docker** (for containerised runs)
+- **Node.js 18+**
 - **Git**
 
-### Clone the repo
+### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-org/critic-ai.git
-cd critic-ai
+git clone https://github.com/ITSYOURAHLAWAT/CriticAI.git
+cd CriticAI
 ```
 
-### Create a virtual environment
+### 2. Backend setup
 
 ```bash
+# Create and activate a virtual environment
 python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+.venv\Scripts\activate        # Windows
+# source .venv/bin/activate   # macOS / Linux
+
+# Install Python dependencies
 pip install -r requirements.txt
+
+# Copy the environment template and add your API keys
+copy .env.example .env
+# Edit .env and add: GROQ_API_KEY, GEMINI_API_KEY (both free, no card needed)
 ```
 
-### Initialise the database
+### 3. Start the backend
 
 ```bash
-python database.py init
+uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
+# API docs: http://127.0.0.1:8000/docs
 ```
 
-### Run the test suite locally
-
-```bash
-python ab_tester.py --all
-```
-
-The results will be written to `reports/` and logged to the console.
-
-### Start the web dashboard
+### 4. Frontend setup (new terminal)
 
 ```bash
 cd frontend
 npm install
 npm run dev
+# App runs at http://localhost:5173
 ```
 
-Open `http://localhost:5173` to view the dashboard.
+### Free API Keys
+
+| Provider | URL | Free Tier |
+|----------|-----|-----------|
+| Groq | [console.groq.com](https://console.groq.com) | ✅ No card needed |
+| Gemini | [aistudio.google.com](https://aistudio.google.com) | ✅ No card needed |
+| Ollama | [ollama.com](https://ollama.com) | ✅ Local, fully free |
 
 ---
 
 ## Usage
 
+### Run your first evaluation
+
+1. Open the app → click **"Run Evaluation"** in the sidebar.
+2. Enter a model name (e.g. `mixtral-8x7b-32768`), select provider `Groq`.
+3. Choose a test category (e.g. `reasoning`) and number of tests.
+4. Click **"Run Evaluation"** — watch results stream in real-time!
+
+### CLI Commands
+
 | Command | Description |
 |---------|-------------|
-| `python cli.py test` | Run all tests and generate a report. |
-| `python cli.py train --model gpt-4o` | Train a new model using the orchestrator. |
-| `python cli.py report --format html` | Generate an HTML report from the latest run. |
-| `python cli.py serve` | Start the FastAPI backend (used by the dashboard). |
-
-For a full list of options, run:
-
-```bash
-python cli.py --help
-```
-
----
-
-## Testing & CI
-
-The project ships with a comprehensive test suite located in `tests/`. Tests are executed by `ab_tester.py` and can be run locally or via CI.
-
-### Local Test Run
-
-```bash
-python ab_tester.py --all
-```
-
-### Docker‑Compose CI
-
-```bash
-docker-compose up --build
-```
-
-This will spin up the API, run the tests, and expose the dashboard on `localhost:5173`.
-
-### GitHub Actions
-
-A sample workflow is provided in `.github/workflows/ci.yml`. It:
-
-1. Checks out the repo.
-2. Sets up Python & Docker.
-3. Installs dependencies.
-4. Runs `ab_tester.py`.
-5. Uploads test reports as artifacts.
+| `python cli.py test` | Run all tests and generate a report |
+| `python cli.py report --format html` | Generate an HTML report |
+| `python cli.py serve` | Start the FastAPI backend |
+| `python cli.py --help` | Full list of options |
 
 ---
 
 ## Contributing
 
-We welcome contributions! Please follow these steps:
+Contributions are welcome! Please follow these steps:
 
 1. **Fork** the repository.
 2. Create a feature branch: `git checkout -b feature/your-feature`.
 3. Write tests for your changes.
-4. Run the test suite to ensure everything passes.
-5. Submit a pull request.
+4. Submit a **pull request** with a clear description.
 
 ### Code Style
 
-- Python: `black`, `isort`, `flake8`.
-- JavaScript/React: `prettier`.
-
-Run the linters locally:
-
-```bash
-pre-commit run --all-files
-```
+- Python: `black`, `isort`, `flake8`
+- JavaScript/React: `prettier`
 
 ---
 
@@ -196,20 +204,21 @@ pre-commit run --all-files
 
 | Milestone | Target | Description |
 |-----------|--------|-------------|
-| **v1.0** | Q3 2026 | Core test runner + basic dashboard. |
-| **v1.1** | Q4 2026 | Full LLM orchestrator + training pipeline. |
-| **v2.0** | 2027 | Multi‑model support, cloud deployment, and advanced analytics. |
+| **v1.0** ✅ | Aug 2026 | Core evaluation runner + premium dashboard |
+| **v1.1** 🔄 | Q4 2026 | Full LLM orchestrator + training pipeline |
+| **v2.0** 📅 | 2027 | Multi-cloud deployment + advanced analytics |
 
 ---
 
 ## License
 
-MIT © 2026 Critic AI. See the [LICENSE](LICENSE) file for details.
+MIT © 2026 CriticAI. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Acknowledgements
 
-- The open‑source community for the libraries we depend on.
-- The contributors who have already helped shape this project.
-- The AI research community for inspiring the evaluation pipelines.
+- [LangGraph](https://github.com/langchain-ai/langgraph) for the agent orchestration framework
+- [Groq](https://groq.com) & [Google Gemini](https://deepmind.google/technologies/gemini/) for free-tier LLM access
+- [Vercel](https://vercel.com) & [Render](https://render.com) for free cloud hosting
+- The open-source community for the libraries that make this possible
